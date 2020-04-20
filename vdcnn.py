@@ -1,3 +1,5 @@
+import torch.nn as nn
+
 class VDCNN(nn.Module):
     """VDCNN class"""
     def __init__(self, num_classes: int, embedding_dim: int, k_max: int, embedding_size: int) -> None:
