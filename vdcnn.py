@@ -1,51 +1,8 @@
-from argparse import Namespace
-from collections import Counter
-import json
-import os
-import re
-import string
 
-
-import numpy as np
-import pandas as pd
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-from torch.utils.data import Dataset, DataLoader
-from tqdm import tqdm_notebook
-from sklearn.model_selection import train_test_split
-from argparse import Namespace
-from collections import Counter
-import json
-import os
-import re
-import string
-
-import numpy as np
-import pandas as pd
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-from torch.utils.data import Dataset, DataLoader
-import sys
-
-
-import os
-from argparse import Namespace
-from collections import Counter
-import json
-import re
-import string
-
-import numpy as np
-import pandas as pd
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-from torch.utils.data import Dataset, DataLoader
 
 class VDCNN(nn.Module):
     """VDCNN class"""
@@ -88,10 +45,6 @@ class VDCNN(nn.Module):
         feature = self._extractor(x)
         score = self._classifier(feature)
         return score
-
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
 
 
 class Flatten(nn.Module):
