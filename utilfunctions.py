@@ -19,9 +19,6 @@ def setup_environment(args):
         os.makedirs(args.save_dir)
 
     if args.expand_filepaths_to_save_dir:
-        args.vectorizer_file = os.path.join(args.save_dir,
-                                            args.vectorizer_file)
-
         args.model_state_file = os.path.join(args.save_dir,
                                              args.model_state_file)
 
@@ -144,11 +141,6 @@ def build_model(args,dataset,classifier,Batches_train,Batches_val,Batches_test,l
         for epoch_index in range(args.num_epochs):
             train_state['epoch_index'] = epoch_index
             print("--------------------- @epoch ",epoch_index,"---------------------")
-
-            # Iterate over training dataset
-
-            # setup: batch generator, set loss and acc to 0, set train mode on
-
             dataset.set_split('train')
             running_loss = 0.0
             running_acc = 0.0
