@@ -16,8 +16,8 @@ from tqdm import tqdm_notebook
 from sklearn.model_selection import train_test_split
 
 
-class NLPDataset(Dataset):
-    def __init__(self, text_df,args,vectorizer):
+class TextDataset(Dataset):
+    def __init__(self, text_df,args):
         self.text_df = text_df
         self._max_seq_length = args.max_text_length
         train_df, self.test_df = train_test_split(text_df)
@@ -26,7 +26,7 @@ class NLPDataset(Dataset):
         self.train_size = len(self.train_df)
         self.validation_size = len(self.val_df)
         self.test_size = len(self.test_df)
-        self._vectorizer = vectorizer
+        #self._vectorizer = vectorizer
 
         self._lookup_dict = {'train': (self.train_df, self.train_size),
                              'val': (self.val_df, self.validation_size),
@@ -45,7 +45,7 @@ class NLPDataset(Dataset):
     def __len__(self):
         return self._target_size
 
-    def __getitem__(self, index):
+    '''def __getitem__(self, index):
         row = self._target_df.iloc[index]
         text_vector = \
             self._vectorizer.vectorize(row.text, self._max_seq_length)
@@ -247,7 +247,7 @@ class SequenceVocabulary(Vocabulary):
         if self.unk_index >= 0:
             return self._token_to_idx.get(token, self.unk_index)
         else:
-            return self._token_to_idx[token]
+            return self._token_to_idx[token]'''
 
 
 class BatchGenerator:
