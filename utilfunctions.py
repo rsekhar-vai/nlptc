@@ -23,7 +23,6 @@ def setup_environment(args):
                                              args.model_state_file)
 
     print("Expanded filepaths: ")
-    print("\t{}".format(args.vectorizer_file))
     print("\t{}".format(args.model_state_file))
 
     # Check CUDA
@@ -105,12 +104,6 @@ def set_seed_everywhere(seed, cuda):
     torch.manual_seed(seed)
     if cuda:
         torch.cuda.manual_seed_all(seed)
-
-def preprocess_text(text):
-    text = ' '.join(word.lower() for word in text.split(" "))
-    text = re.sub(r"([.,!?])", r" \1 ", text)
-    text = re.sub(r"[^a-zA-Z.,!?]+", r" ", text)
-    return text
 
 def predict_category(text, classifier, vectorizer, max_length):
     """Predict a Text category for a new text
