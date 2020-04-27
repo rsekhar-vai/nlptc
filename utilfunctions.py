@@ -150,9 +150,6 @@ def build_model(args,dataset,classifier,loss_func,optimizer,scheduler):
             # setup: batch generator, set loss and acc to 0, set train mode on
 
             dataset.set_split('train')
-            batch_generator = generate_batches(dataset,
-                                               batch_size=args.batch_size,
-                                               device=args.device)
             running_loss = 0.0
             running_acc = 0.0
             classifier.train()
