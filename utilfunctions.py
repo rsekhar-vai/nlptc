@@ -136,7 +136,7 @@ def predict_category(text, classifier, vectorizer, max_length):
     return {'category': predicted_category,
             'probability': probability_values.item()}
 
-def build_model(args,dataset,classifier,loss_func,optimizer,scheduler):
+def build_model(args,dataset,classifier,Batches_train,Batches_val,Batches_test,loss_func,optimizer,scheduler):
 
     train_state = make_train_state(args)
 
