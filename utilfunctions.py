@@ -12,7 +12,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
-from utilclasses import *
+from .utilclasses import *
 
 def setup_environment(args):
     if not os.path.exists(args.save_dir):
