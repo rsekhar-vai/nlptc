@@ -105,26 +105,13 @@ def set_seed_everywhere(seed, cuda):
     if cuda:
         torch.cuda.manual_seed_all(seed)
 
-def predict_category(text, classifier, vectorizer, max_length):
-    """Predict a Text category for a new text
+def predict_category(text,Field_TEXT,Field_LABEL,classifier):
+    preprocessed_sample = [Field_TEXT.preprocess(sample)]
+    processed_sample = Field_TEXT.process(preprocessed_sample).to(args.device)
+    y_pred = classifier(processed_sample)
+    y_pred_np = y_pred.to(torch.device("cpu")).detach().numpy()
 
-    Args:
-        text (str): a raw text string
-        classifier (TextClassifier): an instance of the trained classifier
-        vectorizer (TextVectorizer): the corresponding vectorizer
-        max_length (int): the max sequence length
-            Note: CNNs are sensitive to the input data tensor size.
-                  This ensures to keep it the same size as the training data
-    """
-    text = preprocess_text(text)
-    vectorized_text = \
-        torch.tensor(vectorizer.vectorize(text, vector_length=max_length))
-    result = classifier(vectorized_text.unsqueeze(0), apply_softmax=True)
-    probability_values, indices = result.max(dim=1)
-    predicted_category = vectorizer.category_vocab.lookup_index(indices.item())
-
-    return {'category': predicted_category,
-            'probability': probability_values.item()}
+    return Field_LABEL.vocab.itos[np.argmax(y_pred_np)]
 
 def build_model(args,dataset,classifier,Batches_train,Batches_val,Batches_test,loss_func,optimizer,scheduler):
 
